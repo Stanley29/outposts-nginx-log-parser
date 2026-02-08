@@ -3,8 +3,9 @@
 Проєкт для тестового завдання: парсер nginx‑логів, який конвертує їх у CSV, підтримує фільтри, сортування, автоматичний git commit/push та може запускатися в Docker або на AWS EC2.
 
 ## Мета
+
 Розгорнути робоче середовище на AWS EC2, встановити Docker, зібрати Docker‑образ із парсером логів Nginx, запустити контейнер, автоматично згенерувати CSV та виконати git push у GitHub зсередини Docker‑контейнера.
----
+
 
 ## Функціонал
 
@@ -87,12 +88,12 @@ docker run -v $(pwd):/data nginx-parser --input /data/access.log --git
 У цьому розділі описані кроки по тестуванню парсера на AWS EC2
 
 ### 1. Створення EC2 інстансу
-![EC2 launch](./00_ec2_launch_instance.jpg)
+![EC2 launch](./screenshots/00_ec2_launch_instance.jpg)
 
 Створено EC2 instance (Ubuntu), налаштовано security group, SSH‑доступ та запущено машину.
 
 ### 2. Підключення до EC2 через SSH
-![SSH connected](./02_ec2_ssh_connected.jpg)
+![SSH connected](./screenshots/02_ec2_ssh_connected.jpg)
 
 Підключення командою:
 
@@ -102,7 +103,7 @@ ssh -i mykey.pem ubuntu@<EC2-IP>
 ```
 
 ### 3. Встановлення Docker
-![Docker hello world](./03_docker_hello_world.jpg)
+![Docker hello world](./screenshots/03_docker_hello_world.jpg)
 
 Команди:
 
@@ -121,7 +122,7 @@ docker run hello-world
 ```
 
 ### 4. Встановлення Git
-![Git installed](./04_git_installed.jpg)
+![Git installed](./screenshots/04_git_installed.jpg)
 
 ``` Code
 sudo apt install git -y
@@ -130,7 +131,7 @@ git --version
 ```
 
 ### 5. Генерація SSH‑ключа для GitHub
-![GitHub SSH key](./05_github_ssh_key.jpg)
+![GitHub SSH key](./screenshots/05_github_ssh_key.jpg)
 
 ``` Code
 ssh-keygen -t rsa -b 4096 -C "sergii@example.com"
@@ -140,7 +141,7 @@ cat ~/.ssh/id_rsa.pub
 
 
 Додавання ключа в GitHub → Settings → SSH keys
-![GitHub SSH key added](./05_github_ssh_key_github.jpg)
+![GitHub SSH key added](./screenshots/05_github_ssh_key_github.jpg)
 
 ### 6. Клонування репозиторію
 ![Repo cloned](./06_repo_cloned.jpg)
@@ -152,7 +153,7 @@ cd outposts-nginx-log-parser
 ```
 
 ### 7. Огляд вмісту репозиторію
-![Repo contents](./07_repo_contents.jpg)
+![Repo contents](./screenshots/07_repo_contents.jpg)
 
 Файли:
 
@@ -165,7 +166,7 @@ cd outposts-nginx-log-parser
 - інші допоміжні файли
 
 ### 8. Збірка Docker‑образу
-![Docker build](./08_docker_build.jpg)
+![Docker build](./screenshots/08_docker_build.jpg)
 
 ``` Code
 docker build -t nginx-parser .
@@ -173,11 +174,12 @@ docker build -t nginx-parser .
 ```
 
 ### 9. Запуск Docker з автоматичним git push
-![Docker run with git push](./09_docker_run_git_push.jpg)
+![Docker run with git push](./screenshots/09_docker_run_git_push.jpg)
 
 Це найскладніший етап, бо git всередині контейнера блокує доступ до репозиторію через політику безпеки.
 
 Проблеми, які виникли:
+
 ❌ Проблема 1:
 fatal: detected dubious ownership in repository at '/app'
 
@@ -245,7 +247,7 @@ docker run \
 - git push → OK
 
 ### 10. Результат у GitHub
-![GitHub commit result](./10_github_commit_result.jpg)
+![GitHub commit result](./screenshots/10_github_commit_result.jpg)
 
 У репозиторії з’явився новий файл:
 
