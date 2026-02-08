@@ -144,7 +144,7 @@ cat ~/.ssh/id_rsa.pub
 ![GitHub SSH key added](./screenshots/05_github_ssh_key_github.jpg)
 
 ### 6. Клонування репозиторію
-![Repo cloned](./06_repo_cloned.jpg)
+![Repo cloned](./screenshots/06_repo_cloned.jpg)
 
 ``` Code
 git clone git@github.com:Stanley29/outposts-nginx-log-parser.git
